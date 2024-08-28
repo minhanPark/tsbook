@@ -5,12 +5,21 @@ interface ZaxiosError<ResponseData> {
 interface ZaxiosResponse<ResponseData> {
   data: ResponseData;
 }
-interface Zaxios {
+
+interface Config {
+  url: string;
+  method: string;
+}
+declare class ZAxios {
+  constructor();
   get<ResponseData>(url: string): ZaxiosResponse<ResponseData>;
   post<ResponseData>(
     url: string,
     requestData: unknown
   ): ZaxiosResponse<ResponseData>;
+}
+interface Zaxios extends ZAxios {
+  <ResponseData>(config: Config): ZaxiosResponse<ResponseData>;
   isAxiosError<ResponseData>(
     error: unknown
   ): error is ZaxiosError<ResponseData>;
@@ -43,7 +52,7 @@ interface Post {
   }
 })();
 
-new zaxios().get("www.gilbut.co.kr");
+new ZAxios().get("www.gilbut.co.kr");
 
 zaxios({ url: "www.gilbut.co.kr", method: "get" });
 

@@ -1,1 +1,1 @@
-declare const tag: JQuery<HTMLElement>;
+declare const tag: any;
